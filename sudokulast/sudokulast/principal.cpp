@@ -2,6 +2,7 @@
 #include <array>
 #include <bitset>
 #include <iostream>
+#include <chrono>
 
 constexpr std::size_t
 get_cell(std::size_t row, std::size_t col) noexcept
@@ -142,56 +143,6 @@ std::vector<std::vector<char>> flat_board_to_vec_vec(std::array<char, 81> const 
     return board;
 }
 
-std::array <char, 81> const getflat_board(std::string tira);
-
-int main() {
-
-    // mejor poner una funcion de entrada de valores
-    /*std::array<char, 81> const flat_board = { '6', '.', '.', '.', '4', '5', '2', '.', '.',
-                                              '.', '9', '.', '.', '2', '.', '3', '.', '7',
-                                              '.', '.', '.', '.', '6', '.', '.', '8', '.',
-                                              '.', '3', '.', '4', '.', '.', '8', '.', '.',
-                                              '.', '.', '8', '5', '9', '6', '1', '.', '.',
-                                              '.', '.', '7', '.', '.', '3', '.', '4', '.',
-                                              '.', '5', '.', '.', '3', '.', '.', '.', '.',
-                                              '8', '.', '6', '.', '5', '.', '.', '3', '.',
-                                              '.', '.', '9', '8', '1', '.', '.', '.', '4' };*/
-                                              /*
-                                              std::array<char, 81> const flat_expected = { '5', '3', '4', '6', '7', '8', '9', '1', '2',
-                                                                                           '6', '7', '2', '1', '9', '5', '3', '4', '8',
-                                                                                           '1', '9', '8', '3', '4', '2', '5', '6', '7',
-                                                                                           '8', '5', '9', '7', '6', '1', '4', '2', '3',
-                                                                                           '4', '2', '6', '8', '5', '3', '7', '9', '1',
-                                                                                           '7', '1', '3', '9', '2', '4', '8', '5', '6',
-                                                                                           '9', '6', '1', '5', '3', '7', '2', '8', '4',
-                                                                                           '2', '8', '7', '4', '1', '9', '6', '3', '5',
-                                                                                           '3', '4', '5', '2', '8', '6', '1', '7', '9' };
-                                                                                           */
-    std::string tira;
-    std::array<char, 81> const flat_board = getflat_board(tira);
-    std::vector<std::vector<char>> board = flat_board_to_vec_vec(flat_board);
-
-    // std::vector<std::vector<char>> const expected = flat_board_to_vec_vec(flat_expected);
-
-    Solution soln;
-
-    std::cout << "initial\n";
-    print_board(board);
-
-    /*
-    std::cout << "expected\n";
-    print_board(expected);
-    */
-
-    soln.solveSudoku(board);
-    // std::cout << (board == expected ? "success!" : "UH OH :(") << std::endl;
-    std::cout << "actual\n";
-    print_board(board);
-    std::cin.get();
-    std::cin.get();
-    return 0;
-}
-
 std::array <char, 81> const getflat_board(std::string tira)
 {
     std::array <char, 81> salida;
@@ -207,3 +158,26 @@ std::array <char, 81> const getflat_board(std::string tira)
         salida[i] = tira.at(i);
     return salida;
 }
+
+int main() {
+    std::string tira;
+    std::array<char, 81> const flat_board = getflat_board(tira);
+    std::vector<std::vector<char>> board = flat_board_to_vec_vec(flat_board);
+
+    const std::chrono::time_point<std::chrono::steady_clock> start = std::chrono::steady_clock::now();
+    Solution soln;
+
+    std::cout << "initial\n";
+    print_board(board);
+
+    soln.solveSudoku(board);
+    const std::chrono::time_point<std::chrono::steady_clock> end = std::chrono::steady_clock::now();
+    std::cout << "\n" << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() << " microseconds  " << std::endl;
+    std::cout << "actual\n";
+    print_board(board);
+    std::cin.get();
+    std::cin.get();
+    return 0;
+}
+
+
