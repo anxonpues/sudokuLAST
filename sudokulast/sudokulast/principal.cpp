@@ -163,13 +163,11 @@ int main() {
     std::string tira;
     std::array<char, 81> const flat_board = getflat_board(tira);
     std::vector<std::vector<char>> board = flat_board_to_vec_vec(flat_board);
-
-    const std::chrono::time_point<std::chrono::steady_clock> start = std::chrono::steady_clock::now();
     Solution soln;
 
     std::cout << "initial\n";
     print_board(board);
-
+    const std::chrono::time_point<std::chrono::steady_clock> start = std::chrono::steady_clock::now();
     soln.solveSudoku(board);
     const std::chrono::time_point<std::chrono::steady_clock> end = std::chrono::steady_clock::now();
     std::cout << "\n" << std::chrono::duration_cast<std::chrono::microseconds>(end - start).count() << " microseconds  " << std::endl;
