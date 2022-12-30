@@ -151,7 +151,7 @@ std::array <char, 81> const getflat_board(std::string tira)
     if (tira.length() != 81)
     {
         std::cout << "\n\n Don't touch my balls   don't lie me!";
-        std::cout << "\n\n Enter a sequence of 81 numbers or dots . " << std::endl;
+        std::cout << "\n\n Enter a sequence of 81 numbers or dots . next time! " << std::endl;
         std::cin >> tira;
     }
     for (std::size_t i = 0; i < 81; i++)
