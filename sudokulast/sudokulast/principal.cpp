@@ -1,3 +1,7 @@
+// creeated miércoles, 21 de diciembre de 2022, 12:30:40
+// C:\Users\User\sudokuLAST\sudokulast
+
+
 #include <vector>
 #include <array>
 #include <bitset>
